@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { register } from '@/modules/auth/register';
+import { register } from '@/modules/auth/user';
 import { Register } from '@/components/auth/Register';
 import { useDispatch } from 'react-redux';
 
