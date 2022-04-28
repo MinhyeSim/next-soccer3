@@ -1,8 +1,40 @@
-import { createAction, handleActions } from 'redux-actions';
-import { delay, put, takeLatest, select, throttle } from 'redux-saga/effects';
+//import { createAction, handleActions } from 'redux-actions';
+import { call, delay, put, takeLatest, select, throttle } from 'redux-saga/effects';
+import { HYDRATE } from 'next-redux-wrapper';
+import axios
+ from 'axios';
+const SERVER = 'http://127.0.0.1:5000'
+const headers = {
+    "Content-Type": "application/json",
+    Authorization: "JWT fefege..."
+}
 
-const USER_REGISTER = 'auth/USER_REGISTER';
-export const userRegister = createAction(USER_REGISTER);
+export const initialState = {
+    user: {
+        isLoggingIn: false,
+        data:null
+    }
+}
+
+const USER_REGISTER_REQUEST = 'auth/USER_REGISTER_REQUEST';
+const USER_REGISTER_SUCCESS = 'auth/USER_REGISTER_SUCCESS';
+const USER_REGISTER_FAILURE = 'auth/USER_REGISTER_FAILURE';
+
+
+export const userRegister = user => (
+    {type: USER_REGISTER_REQUEST, payload: user}
+)
+
+
+
+const userRegisterApi = async (payload) => await axios.post(
+    `${SERVER}/user/join`,
+    payload,
+    {headers}
+)
+
+
+
 function* userRegister(action) {
     try{
         const response = yield fetch()
@@ -11,7 +43,7 @@ function* userRegister(action) {
     }catch(error){
         yield put()
     }
-    
+
   }
 export function* watchUserRegister() {
    yield takeLatest(3000, USER_REGISTER, userRegister);
@@ -29,8 +61,24 @@ export const userLogin = createAction(USER_LOGIN);
         yield put()
       }
 
-  }
- export function* watchuserLogin() {
+}
+export function* watchUserLogin() {
     yield takeLatest(3000, USER_LOGIN, userLogin);
-  }
-  
+}
+
+
+const authReducer = (state = initialState, action) => {
+    switch (action.type){
+        case HYDRATE:
+            console.log('### HYDRATE Issue 발생 ###') 
+            return {...state, ...action.payload}
+        case USER_REGISTER_SUCCESS:
+            console.log('### 회원가입 성공 ###') 
+            return {...state, registerResult: action.payload}
+
+
+    }
+
+}
+
+export default authReducer
