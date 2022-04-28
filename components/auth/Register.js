@@ -1,58 +1,152 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { userActions } from '../../redux/reducers/userReducer.ts';
-//import tableStyles from '../common/styles/table.module.css'
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Head from 'next/head';
+const theme = createTheme();
+const textMap = {userJoin: "회원가입"}
+export function Register( ){
+  const sendData = () => {
+    props.setValue('a')
+  }
+  return (
+    <ThemeProvider theme={theme}>
+    <Head>
+    <title>사용자| </title>
+    </Head>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            회원가입
+          </Typography>
 
-export function  Register(){
-    const [user, setUser] =useState({
-        userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
-    })
-    const dispatch = useDispatch()
-    const handleChange = e =>{
-        e.preventDefault()
-        const{name, value} = e.target;
-        setUser({...user,[name]: value})
-    }
-    return <><h1>회원가입폼</h1>    
-    <form onSubmit={
-        e => {
-            e.preventDefault()
-            alert(' 진행 1: 회원가입 클릭 ');
-            dispatch(userActions.joinRequest(user))
-            setUser({
-                userid:'', password:'', name:'', email:'', phone:'', birth:'', address:''
-            })
-        }
-    }
-    >
-    <div>
-    <label><b>사용자ID</b></label>
-    <input type="text" name='userid' onChange={handleChange} /><br />
-
-    <label htmlFor=""><b>비밀번호</b></label>
-    <input type="text" name='password' onChange={handleChange}/><br />
-
-    <label htmlFor=""><b>이름</b></label>
-    <input type="text" name='name' onChange={handleChange}/><br />
-
-    <label htmlFor=""><b>이메일</b></label>
-    <input type="text" name='email' onChange={handleChange}/><br />
-
-    <label htmlFor=""><b>전화번호</b></label>
-    <input type="text" name='phone' onChange={handleChange}/><br />
-
-    <label htmlFor=""><b>생일</b></label>
-    <input type="text" name='birth' onChange={handleChange}/><br />
-
-    <label htmlFor=""><b>주소</b></label>
-    <input type="text" name='address' onChange={handleChange}/><br />
-
-    <button type="submit">회원가입</button><br />
-    
-    </div>
-    <div>
-   
-    </div>
-    </form>
-    </>
+          <Box component="form" noValidate sx={{ mt: 3 }}  >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} >
+                <TextField
+                  autoComplete="given-name"
+                  name="userid"
+                  required
+                  fullWidth
+                  id="userid"
+                  label="사용자ID"
+                  autoFocus
+              
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="name"
+                  label="이 름"
+                  name="name"
+                  autoComplete="family-name"
+          
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+            
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="phone"
+                  label="전화번호"
+                  type="text"
+                  id="phone"
+              
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="birth"
+                  label="생년월일"
+                  type="text"
+                  id="birth"
+         
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="address"
+                  label="주소"
+                  type="text"
+                  id="address"
+             
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              전 송
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/auth/login" variant="body2">
+                  로그인 화면으로 전환
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+         </Box>
+      </Container>
+    </ThemeProvider>
+  );
 }
