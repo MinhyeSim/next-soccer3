@@ -16,10 +16,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Head from 'next/head';
 const theme = createTheme();
 const textMap = {userJoin: "회원가입"}
-export function Register( ){
-  const sendData = () => {
-    props.setValue('a')
-  }
+export function Register({onChange, onSubmit}){
+  
   return (
     <ThemeProvider theme={theme}>
     <Head>
@@ -42,7 +40,7 @@ export function Register( ){
             회원가입
           </Typography>
 
-          <Box component="form" noValidate sx={{ mt: 3 }}  >
+          <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={onSubmit} >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} >
                 <TextField
@@ -53,6 +51,7 @@ export function Register( ){
                   id="userid"
                   label="사용자ID"
                   autoFocus
+                  onChange={onChange}
               
                 />
               </Grid>
@@ -64,6 +63,7 @@ export function Register( ){
                   label="이 름"
                   name="name"
                   autoComplete="family-name"
+                  onChange={onChange}
           
                 />
               </Grid>
@@ -75,6 +75,7 @@ export function Register( ){
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={onChange}
                 
                 />
               </Grid>
@@ -86,6 +87,7 @@ export function Register( ){
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={onChange}
             
                 />
               </Grid>
@@ -97,6 +99,7 @@ export function Register( ){
                   label="전화번호"
                   type="text"
                   id="phone"
+                  onChange={onChange}
               
                 />
               </Grid>
@@ -108,6 +111,7 @@ export function Register( ){
                   label="생년월일"
                   type="text"
                   id="birth"
+                  onChange={onChange}
          
                 />
               </Grid>
@@ -119,6 +123,7 @@ export function Register( ){
                   label="주소"
                   type="text"
                   id="address"
+                  onChange={onChange}
              
                 />
               </Grid>
