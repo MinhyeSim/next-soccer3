@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '@/modules/auth/login';
+import { login } from '@/modules/auth/user';
 import { Login } from '@/components/auth/Login';
 
 const LoginPage = () => {
