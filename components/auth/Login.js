@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
+/*function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -24,7 +24,7 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
+}*/
 
 const theme = createTheme();
 
@@ -94,7 +94,7 @@ export function Login(){
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        {/*<Copyright sx={{ mt: 8, mb: 4 }} />*/}
       </Container>
     </ThemeProvider>
   );

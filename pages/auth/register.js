@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { register } from '@/modules/auth/user';
+import { registerRequest, unregisterRequest } from '@/modules/auth/register';
 import { Register } from '@/components/auth/Register';
 import { useDispatch } from 'react-redux';
 
@@ -16,6 +16,9 @@ const RegisterPage = () => {
       setUser({...user,[name]: value})
   }
   const onSubmit = e => {
+      e.preventDefault()
+      alert('회원가입정보:'+JSON.stringify(user))
+      dispatch(registerRequest(user))
       window.location.href = "./login"
 }
 
@@ -23,12 +26,6 @@ const RegisterPage = () => {
     <Register onChange={onChange} onSubmit={onSubmit} />
   );
 };
-
-export default connect(
-  state => ({
-    registerUser: state.registerUser
-  }),
-  {
-    register
-  }
-)(RegisterPage);
+const mapStateProps = state => ({isRegistered: state.register.isRegistered})//이미 회원가입이 되어있는 회원인지 판단
+const registerActions = {registerRequest, unregisterRequest}
+export default connect(mapStateProps, registerActions)(RegisterPage);

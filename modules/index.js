@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import counter, { watchCounter } from './basic/counter';
-import auth, { watchUserRegister } from './auth/user';
+import auth, { watchUserRegister } from './auth/register';
 
 
 

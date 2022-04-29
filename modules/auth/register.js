@@ -10,19 +10,21 @@ const headers = {
     Authorization: "JWT fefege..."
 }
 export const initialState = {
-    user: {
-        isLoggingIn: false,
-        data: null
-    }
+    isRegitered: false
+    //전역으로 사용하는 상태값 
 }
 
-const USER_REGISTER_REQUEST = 'auth/USER_REGISTER_REQUEST';
-const USER_REGISTER_SUCCESS = 'auth/USER_REGISTER_SUCCESS';
-const USER_REGISTER_FAILURE = 'auth/USER_REGISTER_FAILURE';
+const REGISTER_REQUEST = 'auth/REGISTER_REQUEST';
+const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
+const REGISTER_FAILURE = 'auth/REGISTER_FAILURE';
+const UNREGISTER_REQUEST = 'auth/UNREGISTER_REQUEST';
+const UNREGISTER_SUCCESS = 'auth/UNREGISTER_SUCCESS';
+const UNREGISTER_FAILURE = 'auth/UNREGISTER_FAILURE';
 
-export const userRegister = user => (
-    {type: USER_REGISTER_REQUEST, payload: user}
-)
+export const registerRequest = createAction(REGISTER_REQUEST, data => data)
+export const unregisterRequest = createAction(UNREGISTER_REQUEST, data => data)
+
+
 export function* watchUserRegister() {
     yield takeLatest(USER_REGISTER_REQUEST, userRegisterSaga);
 }

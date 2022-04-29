@@ -1,19 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '@/modules/auth/user';
+import { loginRequest, unloginRequest } from '@/modules/auth/login';
 import { Login } from '@/components/auth/Login';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
+
+  const[user, setUser] = useState({
+    userid:'', password:''
+  })
+  const dispatch = useDispatch()
+  const onChange = e =>{
+      e.preventDefault()
+      const{name, value} = e.target;
+      setUser({...user,[name]: value})
+  }
+  const onSubmit = e => {
+      e.preventDefault()
+      alert('로그인 확인:'+JSON.stringify(user))
+      dispatch(loginRequest(user))
+      window.location.href = "./"
+}
+
+
+
+
+ 
   return (
-    <Login/>
+    <Login onChange={onChange} onSubmit={onSubmit}/>
   );
 };
 
-export default connect(
-  state => ({
-    loginUser: state.loginUser
-  }),
-  {
-    login
-  }
-)(LoginPage);
+const mapStateProps = state => ({isLoggined: state.login.isLoggined})
+const loginActions = {loginRequest, unloginRequest}
+export default connect(mapStateProps, loginActions)(LoginPage);
