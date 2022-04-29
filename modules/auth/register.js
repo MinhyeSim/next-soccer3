@@ -1,5 +1,4 @@
-//import { createAction, handleActions } from 'redux-actions';
-//import {createAction, handleActions} from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 import {call, delay, put, takeLatest, select, throttle} from 'redux-saga/effects';
 import {HYDRATE} from "next-redux-wrapper"
 import axios from 'axios'
@@ -11,7 +10,6 @@ const headers = {
 }
 export const initialState = {
     isRegitered: false
-    //전역으로 사용하는 상태값 
 }
 
 const REGISTER_REQUEST = 'auth/REGISTER_REQUEST';
@@ -24,24 +22,43 @@ const UNREGISTER_FAILURE = 'auth/UNREGISTER_FAILURE';
 export const registerRequest = createAction(REGISTER_REQUEST, data => data)
 export const unregisterRequest = createAction(UNREGISTER_REQUEST, data => data)
 
-
-export function* watchUserRegister() {
-    yield takeLatest(USER_REGISTER_REQUEST, userRegisterSaga);
+export function* registerSaga() {
+    yield takeLatest(REGISTER_REQUEST, signup);
+    yield takeLatest(UNREGISTER_REQUEST, membershipWithdrawal);
 }
-function* userRegisterSaga() {
-    try {
-        const response = yield call(userRegisterAPI)
-        console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
-        yield put({type: USER_REGISTER_SUCCESS, payload: response.data})
-    } catch (error) {
-        yield put({type: USER_REGISTER_FAILURE, payload: error.message})
+
+function* signup(action) {
+    try{
+        console.log("*** 여기가 핵심 ***"+JSON.stringify(action))
+        const response = yield call(registerAPI, action.payload)
+        console.log("회원가입 서버 다녀옴:" +JSON.stringify(response.data))
+        yield put({type: REGISTER_SUCCESS, payload: response.data})
+        yield put(window.location.href="/auth/login")
+    } catch (error){
+        yield put({type: REGISTER_FAILURE, payload:error.message})
     }
 }
-const userRegisterAPI = payload => axios.post(
+
+const registerAPI = payload => axios.post(
     `${SERVER}/user/join`,
     payload,
     {headers}
 )
+function*membershipWithdrawal(){
+    try{
+        console.log("*** 회원탈퇴 ***")
+    } catch(error){
+
+    }
+}
+const register = handleActions({
+    [HYDRATE] : (state, action) => ({
+        ...state, ...action.payload
+    })
+}, initialState)
+
+
+/**handleAction를 사용하기 전 학습용 백업
 
 const auth = (state = initialState, action) => {
     switch (action.type) {
@@ -67,5 +84,5 @@ const auth = (state = initialState, action) => {
             return state;
     }
 }
-
-export default auth
+*/
+export default register

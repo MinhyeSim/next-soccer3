@@ -3,6 +3,7 @@ import { delay, put, takeLatest, select, throttle } from 'redux-saga/effects';
 
 const INCREASE = 'counter/INCREASE';
 const DECREASE = 'counter/DECREASE';
+
 const INCREASE_ASYNC = 'counter/INCREASE_ASYNC';
 const DECREASE_ASYNC = 'counter/DECREASE_ASYNC';
 

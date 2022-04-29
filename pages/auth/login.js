@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { loginRequest, unloginRequest } from '@/modules/auth/login';
 import { Login } from '@/components/auth/Login';
@@ -21,16 +21,12 @@ const LoginPage = () => {
       dispatch(loginRequest(user))
       window.location.href = "./"
 }
-
-
-
-
  
   return (
     <Login onChange={onChange} onSubmit={onSubmit}/>
   );
 };
 
-const mapStateProps = state => ({isLoggined: state.login.isLoggined})
+const mapStateToProps = state => ({})
 const loginActions = {loginRequest, unloginRequest}
-export default connect(mapStateProps, loginActions)(LoginPage);
+export default connect(mapStateToProps, loginActions)(LoginPage);

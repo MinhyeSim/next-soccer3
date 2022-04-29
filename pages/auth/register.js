@@ -26,6 +26,6 @@ const RegisterPage = () => {
     <Register onChange={onChange} onSubmit={onSubmit} />
   );
 };
-const mapStateProps = state => ({isRegistered: state.register.isRegistered})//이미 회원가입이 되어있는 회원인지 판단
+const mapStateToProps = state => ({isRegistered: state.register.isRegistered})//이미 회원가입이 되어있는 회원인지 판단
 const registerActions = {registerRequest, unregisterRequest}
-export default connect(mapStateProps, registerActions)(RegisterPage);
+export default connect(mapStateToProps, registerActions)(RegisterPage);

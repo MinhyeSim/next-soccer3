@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import counter, { watchCounter } from './basic/counter';
-import auth, { watchUserRegister } from './auth/register';
+import register, { watchUserRegister } from './auth/register';
 
 
 
 const rootReducer = combineReducers({
-  counter, auth
+  counter, register
 });
 
 export function* rootSaga() {
