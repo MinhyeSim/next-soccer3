@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Head from 'next/head';
 const theme = createTheme();
 const textMap = {userJoin: "회원가입"}
+
 export function Register({onChange, onSubmit}){
   
   return (
