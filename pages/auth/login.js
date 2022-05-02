@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { loginRequest, unloginRequest } from '@/modules/auth/login';
+import { loginRequest, loginCancelled, logoutRequest } from '@/modules/auth/login';
 import { Login } from '@/components/auth/Login';
 import { useRouter } from 'next/router';
-import { round } from 'lodash';
 
-const LoginPage = ({}) => {
+const LoginPage = () => {
 
   const[user, setUser] = useState({userid:'', password:''})
   const dispatch = useDispatch()
@@ -25,6 +24,6 @@ const LoginPage = ({}) => {
   return (<Login onChange={onChange} onSubmit={onSubmit}/>);
 };
 
-const mapStateToProps = state => ({loginUser: state.login.loginUser})
-const loginActions = {loginRequest, unloginRequest}
+const mapStateToProps = state => ({isLoggined: state.login.isLoggined})
+const loginActions = {loginRequest, loginCancelled, logoutRequest}
 export default connect(mapStateToProps, loginActions)(LoginPage);

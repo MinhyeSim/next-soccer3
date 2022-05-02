@@ -28,7 +28,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export function Login(){
+export function Login({onChange, onSubmit}){
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -47,7 +47,7 @@ export function Login(){
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <Box component="form"  noValidate sx={{ mt: 1 }}>
+          <Box component="form"  noValidate sx={{ mt: 1 }} onSubmit={onSubmit}>
             <TextField
               margin="normal"
               required
@@ -55,8 +55,10 @@ export function Login(){
               id="userid"
               label="사용자ID"
               name="userid"
-              autoComplete="email"
+              autoComplete="userid"
               autoFocus
+              onChange={onChange}
+
             />
             <TextField
               margin="normal"
@@ -67,16 +69,18 @@ export function Login(){
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={onChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="로그인정보저장"
+              label="로그인 정보 저장"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              
             >
               전송
             </Button>
@@ -87,14 +91,14 @@ export function Login(){
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/auth/reister" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        {/*<Copyright sx={{ mt: 8, mb: 4 }} />*/}
+        {/*<Copyright sx={{ mt: 8, mb: 4 }} >*/}
       </Container>
     </ThemeProvider>
   );

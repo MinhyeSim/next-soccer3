@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Profile from '@/components'
+import {Profile} from '@/components'
 import { useSelector } from 'react-redux'
 
 const ProfilePage = () => {

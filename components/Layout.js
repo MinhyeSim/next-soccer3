@@ -1,5 +1,5 @@
 import styles from "@/styles/Layout.module.css";
-import { Header, Nav,Table,Pagination,Footer,Modal } from "@/components/Index";
+import { Header, Nav,Table,Pagination,Footer,Modal } from "@/components";
 
 
 

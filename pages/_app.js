@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import { wrapper } from '@/modules/store'
-import { Header,Footer, Layout, Modal, Pagination, Table, Nav } from '@/components/Index'
+import { Header,Footer, Layout, Modal, Pagination, Table, Nav } from '@/components'
 
 const App = ({ Component, pageProps }) => {
   return <>
